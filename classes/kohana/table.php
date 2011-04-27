@@ -165,13 +165,25 @@ class Kohana_Table {
 			$this->update();
 		}
 
-		// check for ORM
+		// check for ORM Collection
 		if($data instanceof Database_Result)
 		{
 			foreach ($data as $value)
 			{
 				array_push($this->body_data, $value->as_array());
 			}
+		}
+		
+		// check for ORM/Model instance
+		if ($data instanceof ORM)
+		{
+			$obj	= array();
+			$keys	= $data->as_array();
+			foreach($keys as $key => $value)
+			{
+				$obj[$key] = $data->{$key};
+			}
+			array_push($this->body_data, $obj);
 		}
 
 		// check for Jelly
