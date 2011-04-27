@@ -175,7 +175,7 @@ class Kohana_Table {
 		}
 		
 		// check for ORM/Model instance
-		if ($data instanceof ORM)
+		else if ($data instanceof ORM)
 		{
 			$obj	= array();
 			$keys	= $data->as_array();
